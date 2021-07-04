@@ -1,12 +1,14 @@
 module.exports = {
   mode: "all",
   content: ["./src/**/*.ts", "./src/**/*.tsx"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         black: {
-          DEFAULT: '#000'
+          light: '#313944',
+          DEFAULT: '#000',
+          dark: '#202a37'
         },
         white: {
           DEFAULT: '#fff'
