@@ -23,12 +23,14 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## TODO
 
-Fix small screen responsiveness glitches
-Create forgot password view and pass state from loginComponent
-Global languages context
-Pull text from JSON
-Dynamically replace text based on language selected
-Add loading bar
-Some sort of go-back for register/recovery views
-Some indicator for footer page links
-Actually use Jest
+* Find fix for cases when third party cookies are blocked
+* Move banner into global context
+* Fix small screen responsiveness glitches
+* Create forgot password view and pass state from loginComponent
+* Global languages context
+* Pull text from JSON
+* Dynamically replace text based on language selected
+* Add loading bar
+* Some sort of go-back for register/recovery views
+* Some indicator for footer page links
+* Actually use Jest
