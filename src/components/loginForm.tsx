@@ -2,6 +2,10 @@ import { FunctionComponent } from 'react'
 
 const LoginForm: FunctionComponent = () => {
 
+    function submitLogin(event:React.MouseEvent) {
+        event.preventDefault()
+    }
+
     return (
         <form className="mt-8" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
@@ -37,12 +41,13 @@ const LoginForm: FunctionComponent = () => {
             </div>
 
             <div className="mt-2 flex items-center justify-between">
-                <a href="#" className="text-sm font-normal text-navyBlue hover:text-navyBlue-light">
+                <p className="text-sm font-normal cursor-pointer text-navyBlue hover:text-navyBlue-light dark:text-white">
                     Forgot your password?
-                </a>
+                </p>
                 <div>
                     <button
-                        type="submit"
+                        type="button"
+                        onClick={event => submitLogin(event)}
                         className="group w-full flex justify-center py-2 px-4 text-sm font-medium rounded-12px text-white bg-blue hover:bg-blue-light focus:outline-none focus:bg-blue-dark focus:ring-blue-light"
                     >
                         Sign in
