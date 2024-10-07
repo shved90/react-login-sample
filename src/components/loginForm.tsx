@@ -1,55 +1,72 @@
-import { FunctionComponent } from 'react'
-const LoginForm: FunctionComponent = () => {
+import { FunctionComponent, useState, useEffect } from 'react'
+import { Lang } from '../locales/languagePicker'
 
-    const submitLogin = (event: React.MouseEvent) => {
+const LoginForm: FunctionComponent<{ inputStyles: string }> = (props) => {
+
+    const [loginData, setLoginData] = useState({})
+
+    const submitLogin: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
-        setTimeout(() => { alert('you would have logged in'); }, 2000)
+        const formData = new FormData(event.currentTarget);
+        const loginData: { [key: string]: any } = {}
+        for (let [key, value] of formData.entries()) {
+            loginData[key] = value
+        }
+        localStorage.setItem("loginData", JSON.stringify(loginData));
     }
+
+    useEffect(() => {
+        if (localStorage.getItem('loginData')) {
+            setLoginData(JSON.parse(localStorage.getItem('loginData') || "{}"))
+        }
+    }, [])
+
+    console.log(loginData)
+
     return (
-        <form className='mt-8' action='#' method='POST'>
-            <input type='hidden' name='remember' defaultValue='true' />
+        <form className='mt-8' onSubmit={submitLogin} method='POST'>
             <div>
                 <div>
                     <label htmlFor='email-address' className='sr-only'>
-                        Email address*
+                        {Lang().email}*
                     </label>
                     <input
-                        id='email-address'
+                        id='email'
                         name='email'
                         type='email'
                         autoComplete='email'
                         required
-                        className='appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
-                        placeholder='Email address *'
+                        className={props.inputStyles}
+                        placeholder={`${Lang().email}*`}
                     />
                 </div>
                 <div className='mt-2'>
                     <label htmlFor='password' className='sr-only'>
-                        Password*
+                        {Lang().password}*
                     </label>
                     <input
                         id='password'
                         name='password'
                         type='password'
-                        autoComplete='current-password'
+                        autoComplete='on'
+                        minLength={8}
                         required
-                        className='appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
-                        placeholder='Password *'
+                        className={props.inputStyles}
+                        placeholder={`${Lang().password}*`}
                     />
                 </div>
             </div>
 
             <div className='mt-2 flex items-center justify-between'>
                 <p className='text-sm font-normal cursor-pointer text-navyBlue hover:text-navyBlue-light dark:text-white'>
-                    Forgot your password?
+                    {Lang().forgotpassword}
                 </p>
                 <div>
                     <button
-                        type='button'
-                        onClick={event => submitLogin(event)}
+                        type='submit'
                         className='group w-full flex justify-center py-2 px-4 text-sm font-medium rounded-12px text-white bg-blue hover:bg-blue-light focus:outline-none focus:bg-blue-dark focus:ring-blue-light'
                     >
-                        Sign in
+                        {Lang().signin}
                     </button>
                 </div>
             </div>

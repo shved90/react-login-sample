@@ -1,0 +1,16 @@
+{
+    "signin": "Pierakstīties",
+    "signup": "Reģistrēties",
+    "forgotpassword": "Aizmirsi paroli?",
+    "createacc": "Izveidot kontu",
+
+    "email": "E-pasta adrese",
+    "password": "Parole",
+    "name": "Nosaukums",
+    "address": "Adrese",
+
+    "selectlang": "Izvēlēties valodu",
+    "help": "Palīdzība",
+    "privacy": "Privātums",
+    "terms": "Nosacījumi"
+}

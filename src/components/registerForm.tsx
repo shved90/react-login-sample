@@ -1,14 +1,35 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useState, useEffect } from 'react'
+import { Lang } from '../locales/languagePicker'
 
-const RegisterForm: FunctionComponent = () => {
+const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
+
+    const [registrationData, setRegistrationData] = useState({})
+
+    const submitRegistration: React.FormEventHandler<HTMLFormElement> = (event) => {
+        event.preventDefault()
+        const formData = new FormData(event.currentTarget);
+        const registrationData: { [key: string]: any } = {}
+        for (let [key, value] of formData.entries()) {
+            registrationData[key] = value
+        }
+        localStorage.setItem("registrationData", JSON.stringify(registrationData));
+    }
+
+    useEffect(() => {
+        if (localStorage.getItem('registrationData')) {
+            setRegistrationData(JSON.parse(localStorage.getItem('registrationData') || "{}"))
+            console.log('fetched registration data from localstorage for further use', JSON.parse(localStorage.getItem('registrationData') || "{}"))
+        }
+    }, [])
+
+    console.log(registrationData)
 
     return (
-        <form className='mt-8' action='#' method='POST'>
-            <input type='hidden' name='remember' defaultValue='true' />
+        <form className='mt-8' onSubmit={submitRegistration} method='POST'>
             <div className='space-y-2'>
                 <div>
                     <label htmlFor='name' className='sr-only'>
-                        Name
+                        {Lang().name}*
                     </label>
                     <input
                         id='name'
@@ -16,27 +37,27 @@ const RegisterForm: FunctionComponent = () => {
                         type='text'
                         autoComplete='name'
                         required
-                        className='appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
-                        placeholder='Name *'
+                        className={props.inputStyles}
+                        placeholder={`${Lang().name}*`}
                     />
                 </div>
                 <div>
-                    <label htmlFor='email-address' className='sr-only'>
-                        Email address*
+                    <label htmlFor='email' className='sr-only'>
+                        {Lang().email}*
                     </label>
                     <input
-                        id='email-address'
+                        id='email'
                         name='email'
                         type='email'
                         autoComplete='email'
                         required
-                        className='appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
-                        placeholder='Email address *'
+                        className={props.inputStyles}
+                        placeholder={`${Lang().email}*`}
                     />
                 </div>
                 <div>
                     <label htmlFor='address' className='sr-only'>
-                        Address
+                        {Lang().address}*
                     </label>
                     <input
                         id='address'
@@ -44,22 +65,23 @@ const RegisterForm: FunctionComponent = () => {
                         type='text'
                         autoComplete='address'
                         required
-                        className='appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
-                        placeholder='Address *'
+                        className={props.inputStyles}
+                        placeholder={`${Lang().address}*`}
                     />
                 </div>
                 <div>
                     <label htmlFor='password' className='sr-only'>
-                        Password*
+                        {Lang().password}*
                     </label>
                     <input
                         id='password'
                         name='password'
                         type='password'
                         autoComplete='new-password'
+                        minLength={8}
                         required
-                        className='appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
-                        placeholder='Password *'
+                        className={props.inputStyles}
+                        placeholder={`${Lang().password}*`}
                     />
                 </div>
             </div>
@@ -70,7 +92,7 @@ const RegisterForm: FunctionComponent = () => {
                     onClick={event => event.preventDefault()}
                     className='group w-full flex justify-center py-2 px-4 text-sm font-medium rounded-12px text-white bg-blue hover:bg-blue-light focus:outline-none focus:bg-blue-dark focus:ring-blue-light'
                 >
-                    Sign up
+                    {Lang().signup}
                 </button>
             </div>
         </form>

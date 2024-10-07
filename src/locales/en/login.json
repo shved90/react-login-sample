@@ -1,0 +1,16 @@
+{
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "forgotpassword": "Forgot your password?",
+    "createacc": "Create an account",
+
+    "email": "Email address",
+    "password": "Password",
+    "name": "Name",
+    "address": "Address",
+
+    "selectlang": "Select language",
+    "help": "Help",
+    "privacy": "Privacy",
+    "terms": "Terms"
+}
