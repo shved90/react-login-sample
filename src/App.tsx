@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
-import LoginComponent from './components/loginComponent'
-import MainWrapper from './components/wrapper'
+import { LoginComponent } from './components/loginComponent'
+import { MainWrapper } from './components/wrapper'
 import { ThemeProvider } from './providers/themeProvider'
 import { LangProvider } from './providers/languagesProvider'
 

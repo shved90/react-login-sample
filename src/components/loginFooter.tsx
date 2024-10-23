@@ -1,14 +1,14 @@
-import { FunctionComponent, useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { ReactComponent as Sun } from '../assets/sun.svg'
 import { ReactComponent as Moon } from '../assets/moon.svg'
 import { useTheme } from '../providers/themeProvider'
-import Dropdown from './dropdown'
+import { Dropdown } from './dropdown'
 import { Lang } from '../locales/languagePicker'
 
-const LoginFooter: FunctionComponent = () => {
+const LoginFooter = ({ }): ReactElement => {
 
     const { dispatchTheme } = useTheme()
-    let bodyClasses = document.querySelector('body')!.classList
+    let bodyClasses = document.body.classList
 
     useEffect(() => {
         if (localStorage.getItem('theme') === 'dark') {
@@ -50,4 +50,4 @@ const LoginFooter: FunctionComponent = () => {
     )
 }
 
-export default LoginFooter
+export { LoginFooter }

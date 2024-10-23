@@ -40,6 +40,6 @@ While a good demonstration of skill, this app is by no means complete and there 
 * Add confirmation pages on form submission actions.
 * Add validation error messages, double validation via JS to emulate server validation.
 * Add an offer to generate password based on [sample JSON dictionary](https://github.com/dwyl/english-words/blob/master/words_dictionary.json).
-* Add loading bar for login/registration actions.
+* Add loading bar for login/registration actions, demonstrate usage of async/await.
 * Look into hashing password storage.
-* Add ability to go back from registration/forgot passwrod views.
+* Add ability to go back from registration/forgot password views.

@@ -1,7 +1,11 @@
-import { FunctionComponent, useState, useEffect } from 'react'
+import { ReactElement, useState, useEffect } from 'react'
 import { Lang } from '../locales/languagePicker'
 
-const LoginForm: FunctionComponent<{ inputStyles: string }> = (props) => {
+interface LoginFormProps {
+    inputStyles: string;
+}
+
+const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
 
     const [loginData, setLoginData] = useState({})
 
@@ -15,13 +19,19 @@ const LoginForm: FunctionComponent<{ inputStyles: string }> = (props) => {
         localStorage.setItem("loginData", JSON.stringify(loginData));
     }
 
+    const existingLogin = JSON.parse(localStorage.getItem('loginData') || "{}")
+
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
-            setLoginData(JSON.parse(localStorage.getItem('loginData') || "{}"))
+            try {
+                setLoginData(existingLogin)
+                console.log("loginData", loginData)
+            } catch (error) {
+                alert(error)
+            }
+
         }
     }, [])
-
-    console.log(loginData)
 
     return (
         <form className='mt-8' onSubmit={submitLogin} method='POST'>
@@ -36,7 +46,7 @@ const LoginForm: FunctionComponent<{ inputStyles: string }> = (props) => {
                         type='email'
                         autoComplete='email'
                         required
-                        className={props.inputStyles}
+                        className={inputStyles}
                         placeholder={`${Lang().email}*`}
                     />
                 </div>
@@ -51,7 +61,7 @@ const LoginForm: FunctionComponent<{ inputStyles: string }> = (props) => {
                         autoComplete='on'
                         minLength={8}
                         required
-                        className={props.inputStyles}
+                        className={inputStyles}
                         placeholder={`${Lang().password}*`}
                     />
                 </div>
@@ -74,4 +84,4 @@ const LoginForm: FunctionComponent<{ inputStyles: string }> = (props) => {
     )
 }
 
-export default LoginForm
+export { LoginForm, LoginFormProps }

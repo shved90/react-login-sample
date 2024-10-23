@@ -1,11 +1,11 @@
-import { FunctionComponent, useState } from 'react'
+import { ReactElement, useState } from 'react'
 import { ReactComponent as Logo } from '../assets/kidsloop_min_logo.svg'
-import LoginForm from './loginForm'
-import RegisterForm from './registerForm'
-import LoginFooter from './loginFooter'
+import { LoginForm } from './loginForm'
+import { RegisterForm } from './registerForm'
+import { LoginFooter } from './loginFooter'
 import { Lang } from '../locales/languagePicker'
 
-const LoginComponent: FunctionComponent = () => {
+const LoginComponent = ({ }): ReactElement => {
     const inputStyles = 'appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
 
     const [isRegistration, setIsRegistration] = useState(false)
@@ -34,4 +34,4 @@ const LoginComponent: FunctionComponent = () => {
     )
 }
 
-export default LoginComponent
+export { LoginComponent }

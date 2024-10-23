@@ -1,7 +1,11 @@
-import { FunctionComponent, useState, useEffect } from 'react'
+import { ReactElement, useState, useEffect } from 'react'
 import { Lang } from '../locales/languagePicker'
 
-const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
+interface RegisterFormProps {
+    inputStyles: string;
+}
+
+const RegisterForm = ({ inputStyles }: RegisterFormProps): ReactElement => {
 
     const [registrationData, setRegistrationData] = useState({})
 
@@ -15,14 +19,19 @@ const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
         localStorage.setItem("registrationData", JSON.stringify(registrationData));
     }
 
+    const existingRegistration = JSON.parse(localStorage.getItem('registrationData') || "{}")
+
     useEffect(() => {
         if (localStorage.getItem('registrationData')) {
-            setRegistrationData(JSON.parse(localStorage.getItem('registrationData') || "{}"))
-            console.log('fetched registration data from localstorage for further use', JSON.parse(localStorage.getItem('registrationData') || "{}"))
+            try {
+                setRegistrationData(existingRegistration)
+                console.log("registrationData", registrationData)
+            } catch (error) {
+                alert(error)
+            }
+
         }
     }, [])
-
-    console.log(registrationData)
 
     return (
         <form className='mt-8' onSubmit={submitRegistration} method='POST'>
@@ -37,7 +46,7 @@ const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
                         type='text'
                         autoComplete='name'
                         required
-                        className={props.inputStyles}
+                        className={inputStyles}
                         placeholder={`${Lang().name}*`}
                     />
                 </div>
@@ -51,7 +60,7 @@ const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
                         type='email'
                         autoComplete='email'
                         required
-                        className={props.inputStyles}
+                        className={inputStyles}
                         placeholder={`${Lang().email}*`}
                     />
                 </div>
@@ -65,7 +74,7 @@ const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
                         type='text'
                         autoComplete='address'
                         required
-                        className={props.inputStyles}
+                        className={inputStyles}
                         placeholder={`${Lang().address}*`}
                     />
                 </div>
@@ -80,7 +89,7 @@ const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
                         autoComplete='new-password'
                         minLength={8}
                         required
-                        className={props.inputStyles}
+                        className={inputStyles}
                         placeholder={`${Lang().password}*`}
                     />
                 </div>
@@ -99,4 +108,4 @@ const RegisterForm: FunctionComponent<{ inputStyles: string }> = (props) => {
     )
 }
 
-export default RegisterForm
+export { RegisterForm, RegisterFormProps }

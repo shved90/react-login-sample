@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/build
 
 # Runtime data
 pids
@@ -89,6 +90,10 @@ jspm_packages/
 
 # Lerna
 lerna-debug.log
+
+# compiled configs
+bun.lockb
+package-lock.json
 
 # System Files
 .DS_Store

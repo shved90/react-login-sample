@@ -1,11 +1,10 @@
-import { FunctionComponent, useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useLang } from '../providers/languagesProvider'
 import { Lang, langList } from '../locales/languagePicker'
 
-const Dropdown: FunctionComponent = () => {
+const Dropdown = ({ }): ReactElement => {
 
     const { dispatchLang } = useLang()
-
     const setLanguage = (language: string) => {
         localStorage.setItem('lang', language)
         dispatchLang({ lang: language })
@@ -28,8 +27,10 @@ const Dropdown: FunctionComponent = () => {
                 <div className='opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95'>
                     <div className='absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none dark:text-white dark:bg-black-light' aria-labelledby='language-dropdown-trigger' id='language-dropdown' role='menu'>
                         <div className='py-1'>
-                            {langList.map((lang, index) =>
-                                <button onClick={() => setLanguage(lang.langShort)} key={index} tabIndex={index} className='text-black flex justify-between w-full px-4 py-2 text-xs leading-5 text-left dark:text-white hover:underline' role='menuitem'>{lang.langFull}</button>
+                            {Array.from(langList).map(([shortLang, lang], index) => 
+                                <button onClick={() => setLanguage(shortLang)} key={index} tabIndex={index} className='text-black flex justify-between w-full px-4 py-2 text-xs leading-5 text-left dark:text-white hover:underline' role='menuitem'>
+                                    {lang.languagename}
+                                </button>
                             )}
                         </div>
                     </div>
@@ -40,4 +41,4 @@ const Dropdown: FunctionComponent = () => {
     )
 }
 
-export default Dropdown
+export { Dropdown }
