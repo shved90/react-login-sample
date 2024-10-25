@@ -43,3 +43,4 @@ While a good demonstration of skill, this app is by no means complete and there 
 * Add loading bar for login/registration actions, demonstrate usage of async/await.
 * Look into hashing password storage.
 * Add ability to go back from registration/forgot password views.
+* Add dynamic titles to pagesData, currently dispatcher is null

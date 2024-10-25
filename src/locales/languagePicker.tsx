@@ -5,18 +5,19 @@ import russian from './ru/login.json'
 
 interface langType {
     languagename: string,
-    signin: string;
-    signup: string;
-    forgotpassword: string;
-    createacc: string;
-    email: string;
-    password: string;
-    name: string;
-    address: string;
-    selectlang: string;
-    help: string;
-    privacy: string;
-    terms: string;
+    signin: string,
+    signup: string,
+    forgotpassword: string,
+    createacc: string,
+    submit: string,
+    email: string,
+    password: string,
+    name: string,
+    address: string,
+    selectlang: string,
+    help: string,
+    privacy: string,
+    terms: string
 }
 
 const langList =new Map([

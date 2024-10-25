@@ -1,4 +1,5 @@
 import { ReactElement, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import { Lang } from '../locales/languagePicker'
 
 interface LoginFormProps {
@@ -68,9 +69,9 @@ const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
             </div>
 
             <div className='mt-2 flex items-center justify-between'>
-                <p className='text-sm font-normal cursor-pointer text-navyBlue hover:text-navyBlue-light dark:text-white'>
+                <Link to="/passwordrecover" className='text-sm font-normal cursor-pointer text-navyBlue hover:text-navyBlue-light dark:text-white'>
                     {Lang().forgotpassword}
-                </p>
+                </Link>
                 <div>
                     <button
                         type='submit'
