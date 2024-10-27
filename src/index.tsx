@@ -5,7 +5,7 @@ import './index.css'
 import App from './App'
 
 const rootElement = document.getElementById('root')
-const root = createRoot(rootElement as any)
+const root = createRoot(rootElement as Element)
 
 root.render(
   <StrictMode>

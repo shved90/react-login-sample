@@ -22,7 +22,7 @@ const LoginJourneyDefaults = createContext<LoginJourneyContextTypes> ({
     setJourney: () => {}
 })
 
-const LoginJourneyContext = () => useContext(LoginJourneyDefaults)
+const useLoginJourneyContext = () => useContext(LoginJourneyDefaults)
 
 const MainWrapper = ({ children }: MainWrapperProps): ReactElement => {
 
@@ -45,4 +45,4 @@ const MainWrapper = ({ children }: MainWrapperProps): ReactElement => {
     )
 }
 
-export { MainWrapper, MainWrapperProps, LoginJourneyContext, LoginJourneyContextTypes }
+export { MainWrapper, MainWrapperProps, useLoginJourneyContext, LoginJourneyContextTypes }

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { ReactComponent as Logo } from '../assets/kidsloop_min_logo.svg'
-import { LoginJourneyContext } from './wrapper'
+import { useLoginJourneyContext } from './wrapper'
 
 const Header = ({ }): ReactElement => {
 
@@ -10,7 +10,7 @@ const Header = ({ }): ReactElement => {
                 <Logo />
             </div>
             <h4 className='mt-6 text-left text-2xl font-normal text-black-500 dark:text-white'>
-                {LoginJourneyContext().title}
+                {useLoginJourneyContext().title}
             </h4>
         </div>
 

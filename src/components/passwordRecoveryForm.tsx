@@ -12,7 +12,7 @@ const PasswordRecoveryForm = ({ inputStyles }: PasswordRecoveryFormProps): React
     const submitPasswordRecovery: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
         const formData = new FormData(event.currentTarget);
-        const loginData: { [key: string]: any } = {}
+        const loginData: { [key: string]: FormDataEntryValue } = {}
         for (let [key, value] of formData.entries()) {
             loginData[key] = value
         }

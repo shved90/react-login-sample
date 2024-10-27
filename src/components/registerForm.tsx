@@ -12,7 +12,7 @@ const RegisterForm = ({ inputStyles }: RegisterFormProps): ReactElement => {
     const submitRegistration: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
         const formData = new FormData(event.currentTarget);
-        const registrationData: { [key: string]: any } = {}
+        const registrationData: { [key: string]: FormDataEntryValue } = {}
         for (let [key, value] of formData.entries()) {
             registrationData[key] = value
         }
