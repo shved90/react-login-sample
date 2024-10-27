@@ -1,6 +1,7 @@
 import { ReactElement, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Lang } from '../locales/languagePicker'
+import { LoginJourneyContext } from './wrapper';
 
 interface LoginFormProps {
     inputStyles: string;
@@ -18,6 +19,7 @@ const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
             loginData[key] = value
         }
         localStorage.setItem("loginData", JSON.stringify(loginData));
+        LoginJourneyContext().setJourney('confirm')
     }
 
     const existingLogin = JSON.parse(localStorage.getItem('loginData') || "{}")
