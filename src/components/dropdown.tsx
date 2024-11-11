@@ -1,18 +1,20 @@
 import { ReactElement, useEffect } from 'react'
-import { useLang } from '../providers/languagesProvider'
-import { Lang, langList } from '../locales/languagePicker'
+import { useLang } from '../utils/langProvider'
+import { Lang, langList } from '../utils/languagePicker'
 
 const Dropdown = ({ }): ReactElement => {
 
     const { dispatchLang } = useLang()
+    const currentLang = localStorage.getItem('lang')
+
     const setLanguage = (language: string) => {
         localStorage.setItem('lang', language)
         dispatchLang({ lang: language })
     }
 
     useEffect(() => {
-        if (localStorage.getItem('lang')) {
-            dispatchLang({ lang: localStorage.getItem('lang') })
+        if (currentLang) {
+            dispatchLang({ lang: currentLang})
         }
     }, [])
 

@@ -1,23 +1,27 @@
-import type { ReactNode } from 'react'
-import { useContext, createContext, useReducer } from "react"
+import type { ReactNode, Dispatch } from 'react'
+import { useContext, createContext, useReducer, useMemo } from "react"
 
-const defaultTheme = { theme: false }
+const defaultTheme = { theme: 'light' }
 
-export type Dispatch = (action: 'SET_THEME') => void
 export type State = typeof defaultTheme
 
 const ThemeContext = createContext<
-    { state: State, dispatchTheme: any } | undefined
+    { state: State, dispatchTheme: Dispatch<State> } | undefined
 >(undefined)
 
-const themeReducer = (state: State, action: 'SET_THEME') => {
+const themeReducer = (state: State) => {
     return { theme: state.theme }
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatchTheme] = useReducer(themeReducer, defaultTheme)
+
+    const themeValue = useMemo(() => ({
+        state, dispatchTheme
+    }), [state]);
+
     return (
-        <ThemeContext.Provider value={{ state, dispatchTheme }}>
+        <ThemeContext.Provider value={themeValue}>
             {children}
         </ThemeContext.Provider>
     )

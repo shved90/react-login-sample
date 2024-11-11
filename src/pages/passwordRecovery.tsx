@@ -1,7 +1,7 @@
 import { PasswordRecoveryForm } from "../components/passwordRecoveryForm"
 import { Link } from 'react-router-dom'
-import { Lang } from '../locales/languagePicker'
-import { useLoginJourneyContext } from '../components/wrapper'
+import { Lang } from '../utils/languagePicker'
+import { useLoginJourneyContext } from '../utils/loginJourneyContext'
 
 const PasswordRecoverPage = () => {
 

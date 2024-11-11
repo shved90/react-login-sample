@@ -1,15 +1,8 @@
-import { PasswordRecoverPage } from "../pages/passwordRecovery";
-import { LoginPage } from "../pages/homeLogin";
-import { RegistrationPage } from "../pages/registration";
-import { Lang } from '../locales/languagePicker'
+import { PasswordRecoverPage } from "../pages/passwordRecovery"
+import { LoginPage } from "../pages/homeLogin"
+import { RegistrationPage } from "../pages/registration"
 
-interface routerType {
-    title: string;
-    path: string;
-    element: JSX.Element;
-}
-
-const pagesData: routerType[] = [
+const pagesData = [
     {
         path: "/",
         element: <LoginPage />,
@@ -25,6 +18,6 @@ const pagesData: routerType[] = [
         element: <RegistrationPage />,
         title: "Register"
     }
-];
+]
 
-export { pagesData, routerType };
+export { pagesData }

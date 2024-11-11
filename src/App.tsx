@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { MainWrapper } from './components/wrapper'
-import { ThemeProvider } from './providers/themeProvider'
-import { LangProvider } from './providers/languagesProvider'
+import { ThemeProvider } from './utils/themeProvider'
+import { LangProvider } from './utils/langProvider'
 import { BrowserRouter } from "react-router-dom";
 import Router from "./router/router";
 

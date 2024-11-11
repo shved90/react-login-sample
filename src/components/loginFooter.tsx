@@ -1,9 +1,9 @@
 import { ReactElement, useEffect } from 'react'
 import { ReactComponent as Sun } from '../assets/sun.svg'
 import { ReactComponent as Moon } from '../assets/moon.svg'
-import { useTheme } from '../providers/themeProvider'
+import { useTheme } from '../utils/themeProvider'
 import { Dropdown } from './dropdown'
-import { Lang } from '../locales/languagePicker'
+import { Lang } from '../utils/languagePicker'
 
 const LoginFooter = ({ }): ReactElement => {
 
@@ -13,7 +13,7 @@ const LoginFooter = ({ }): ReactElement => {
     useEffect(() => {
         if (localStorage.getItem('theme') === 'dark') {
             bodyClasses.add('dark')
-            dispatchTheme(true, 'SET_THEME')
+            dispatchTheme({theme: 'dark'})
         }
     }, [])
 
@@ -21,11 +21,11 @@ const LoginFooter = ({ }): ReactElement => {
         if (localStorage.getItem('theme') === 'dark') {
             bodyClasses.remove('dark')
             localStorage.removeItem('theme')
-            dispatchTheme(true, 'SET_THEME')
+            dispatchTheme({theme: 'light'})
         } else {
             bodyClasses.add('dark')
             localStorage.setItem('theme', 'dark')
-            dispatchTheme(false, 'SET_THEME')
+            dispatchTheme({theme: 'dark'})
         }
     }
 

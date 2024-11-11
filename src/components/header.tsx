@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { ReactComponent as Logo } from '../assets/kidsloop_min_logo.svg'
-import { useLoginJourneyContext } from './wrapper'
+import { useLoginJourneyContext } from '../utils/loginJourneyContext'
 
 const Header = ({ }): ReactElement => {
 

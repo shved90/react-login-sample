@@ -1,5 +1,5 @@
 import { ReactElement, useState, useEffect } from 'react'
-import { Lang } from '../locales/languagePicker'
+import { Lang } from '../utils/languagePicker'
 
 interface RegisterFormProps {
     inputStyles: string;

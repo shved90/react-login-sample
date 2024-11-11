@@ -1,36 +1,23 @@
-import { ReactElement } from 'react'
-
+import { ReactElement, useState, useMemo } from 'react'
+import { Header } from './header'
 import { LoginFooter } from './loginFooter'
-import { createContext, useContext, useState } from 'react'
-import { Header } from './header';
+import { LoginJourneyDefaults } from '../utils/loginJourneyContext'
 
 interface MainWrapperProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
-
-interface LoginJourneyContextTypes {
-    title: string,
-    setTitle: (title: string) => void,
-    journey: string,
-    setJourney: (journey: string) => void
-}
-
-const LoginJourneyDefaults = createContext<LoginJourneyContextTypes> ({
-    title: "",
-    setTitle: () => {},
-    journey: "",
-    setJourney: () => {}
-})
-
-const useLoginJourneyContext = () => useContext(LoginJourneyDefaults)
 
 const MainWrapper = ({ children }: MainWrapperProps): ReactElement => {
 
     const [title, setTitle] = useState<string>('')
     const [journey, setJourney] = useState<string>('')
 
+    const loginValues = useMemo(() => ({
+        title, setTitle, journey, setJourney
+    }), [title, journey]);
+
     return (
-        <LoginJourneyDefaults.Provider value={{ title, setTitle, journey, setJourney }}>
+        <LoginJourneyDefaults.Provider value={loginValues}>
             <div className='flex items-center justify-center h-screen py-12 px-4 sm:px-6 lg:px-8 dark:bg-black-light bg-white'>
                 <div className='flex flex-col max-w-sm w-full'>
                     <div className='shadow-standard rounded-12px py-12 px-4 sm:px-6 lg:px-8 dark:bg-black-dark'>
@@ -45,4 +32,4 @@ const MainWrapper = ({ children }: MainWrapperProps): ReactElement => {
     )
 }
 
-export { MainWrapper, MainWrapperProps, useLoginJourneyContext, LoginJourneyContextTypes }
+export { MainWrapper, MainWrapperProps }

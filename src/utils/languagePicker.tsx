@@ -1,9 +1,9 @@
-import { useLang } from '../providers/languagesProvider'
-import english from './en/login.json'
-import latvian from './lv/login.json'
-import russian from './ru/login.json'
+import { useLang } from './langProvider'
+import english from '../locales/en/login.json'
+import latvian from '../locales/lv/login.json'
+import russian from '../locales/ru/login.json'
 
-interface langType {
+interface LangType {
     languagename: string,
     signin: string,
     signup: string,
@@ -32,4 +32,4 @@ const Lang = () => {
     return selectedLang !== undefined ? selectedLang : english
 }
 
-export {langList, langType, Lang}
+export {langList, LangType, Lang}

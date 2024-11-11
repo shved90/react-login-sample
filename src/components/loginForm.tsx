@@ -1,10 +1,10 @@
 import { ReactElement, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import { Lang } from '../locales/languagePicker'
-import { useLoginJourneyContext } from './wrapper';
+import { Link } from 'react-router-dom'
+import { Lang } from '../utils/languagePicker'
+import { useLoginJourneyContext } from '../utils/loginJourneyContext'
 
 interface LoginFormProps {
-    inputStyles: string;
+    inputStyles: string
 }
 
 const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
@@ -14,12 +14,12 @@ const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
 
     const submitLogin: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
-        const formData = new FormData(event.currentTarget);
+        const formData = new FormData(event.currentTarget)
         const loginData: { [key: string]: FormDataEntryValue } = {}
         for (let [key, value] of formData.entries()) {
             loginData[key] = value
         }
-        localStorage.setItem("loginData", JSON.stringify(loginData));
+        localStorage.setItem("loginData", JSON.stringify(loginData))
         state.setJourney('confirm')
     }
 
