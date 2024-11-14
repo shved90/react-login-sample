@@ -6,6 +6,14 @@
     "createacc": "Izveidot kontu",
     "submit": "Iesniedz",
 
+    "confirmsignin": "Parakstīts",
+    "confirmforgotpassword": "e-pasts nosūtīts",
+    "confirmcreteacc": "Izveidots konts",
+
+    "failedsignin": "Neizdevās parakstīties",
+    "failedforgotpassword": "Paroles atgūšana neizdevās",
+    "failedcreteacc": "neizdevās izveidot kontu",
+
     "email": "E-pasta adrese",
     "password": "Parole",
     "name": "Nosaukums",

@@ -10,7 +10,7 @@ const RegisterForm = ({ inputStyles }: RegisterFormProps): ReactElement => {
     const [registrationData, setRegistrationData] = useState({})
 
     const submitRegistration: React.FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
         const formData = new FormData(event.currentTarget);
         const registrationData: { [key: string]: FormDataEntryValue } = {}
         for (let [key, value] of formData.entries()) {
@@ -97,7 +97,7 @@ const RegisterForm = ({ inputStyles }: RegisterFormProps): ReactElement => {
 
             <div className='mt-6 flex items-center justify-between'>
                 <button
-                    type='button'
+                    type='submit'
                     onClick={event => event.preventDefault()}
                     className='group w-full flex justify-center py-2 px-4 text-sm font-medium rounded-12px text-white bg-blue hover:bg-blue-light focus:outline-none focus:bg-blue-dark focus:ring-blue-light'
                 >

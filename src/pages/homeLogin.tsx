@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Lang } from '../utils/languagePicker'
 import { LoginForm } from '../components/loginForm'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
-import { Confirmation } from '../components/confirmation'
+import { Confirmation, ConfirmationStates } from '../components/confirmation'
 
 const LoginPage = () => {
 
@@ -13,7 +13,7 @@ const LoginPage = () => {
     state.setTitle(Lang().signin)
 
     return (
-        state.journey !== "confirm" ? 
+        state.journey !== ConfirmationStates.confirmLogin ? 
         <>
             <LoginForm inputStyles={inputStyles} />
             <div className='flex items-left justify-between mt-14'>

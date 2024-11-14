@@ -7,6 +7,10 @@ interface MainWrapperProps {
     children: React.ReactNode
 }
 
+const loadingValue = {
+    width: '45%'
+} as React.CSSProperties
+
 const MainWrapper = ({ children }: MainWrapperProps): ReactElement => {
 
     const [title, setTitle] = useState<string>('')
@@ -22,7 +26,11 @@ const MainWrapper = ({ children }: MainWrapperProps): ReactElement => {
                 <div className='flex flex-col max-w-sm w-full'>
                     <div className='shadow-standard rounded-12px py-12 px-4 sm:px-6 lg:px-8 dark:bg-black-dark'>
                         <Header />
-                        {children}
+                        {journey !== "loading" ? children :
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div className="bg-blue-600 h-2.5 rounded-full" style={loadingValue}></div>
+                            </div>
+                        }
                     </div>
                     <LoginFooter />
                 </div>

@@ -6,6 +6,14 @@
     "createacc": "Создать аккаунт",
     "submit": "Отправить",
 
+    "confirmsignin": "Вы зашли",
+    "confirmforgotpassword": "Емеил выслан на почту",
+    "confirmcreteacc": "Аккаунт создан",
+
+    "failedsignin": "Не получилось зайти",
+    "failedforgotpassword": "Не получилось восстановить пароль",
+    "failedcreteacc": "Не получилось создать аккаунт",
+
     "email": "Емеил адрес",
     "password": "Пароль",
     "name": "Имя",

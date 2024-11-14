@@ -6,6 +6,14 @@
     "createacc": "Create an account",
     "submit": "Submit",
 
+    "confirmsignin": "Signed in",
+    "confirmforgotpassword": "Email sent",
+    "confirmcreteacc": "Account Created",
+
+    "failedsignin": "Sign in failed",
+    "failedforgotpassword": "Password recovery failed",
+    "failedcreteacc": "Failed to create account",
+
     "email": "Email address",
     "password": "Password",
     "name": "Name",
