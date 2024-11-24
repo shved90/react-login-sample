@@ -1,5 +1,8 @@
 import { ReactElement, useState, useEffect } from 'react'
 import { Lang } from '../utils/languagePicker'
+import { FetchData, ApplyData } from '../utils/mockApi'
+import { ConfirmationStates } from './confirmation'
+import { useLoginJourneyContext } from '../utils/loginJourneyContext'
 
 interface PasswordRecoveryFormProps {
     inputStyles: string;
@@ -7,29 +10,34 @@ interface PasswordRecoveryFormProps {
 
 const PasswordRecoveryForm = ({ inputStyles }: PasswordRecoveryFormProps): ReactElement => {
 
-    const [loginData, setLoginData] = useState({})
+    const [passwordRecovery, setPasswordRecovery] = useState({})
+    const state = useLoginJourneyContext()
+
+    const applyPasswordRecovery = (fetchedData: FormData) => {
+        ApplyData(fetchedData, state)
+
+        setTimeout(() => {
+            localStorage.setItem("passwordRecovery", JSON.stringify(passwordRecovery))
+            state.setJourney(ConfirmationStates.confirmPasswordRecovery)
+        }, 500)
+    }
 
     const submitPasswordRecovery: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
         const formData = new FormData(event.currentTarget);
-        const loginData: { [key: string]: FormDataEntryValue } = {}
-        for (let [key, value] of formData.entries()) {
-            loginData[key] = value
-        }
-        localStorage.setItem("loginData", JSON.stringify(loginData));
+        FetchData(formData, ConfirmationStates.failedPasswordRecovery, state).then(fetchedData => applyPasswordRecovery(fetchedData)).catch(error => alert(error))
     }
 
-    const existingLogin = JSON.parse(localStorage.getItem('loginData') || "{}")
+    const existingPasswordRecovery = JSON.parse(localStorage.getItem('passwordRecovery') || "{}")
 
     useEffect(() => {
-        if (localStorage.getItem('loginData')) {
+        if (localStorage.getItem('passwordRecovery')) {
             try {
-                setLoginData(existingLogin)
-                console.log("loginData", loginData)
+                setPasswordRecovery(existingPasswordRecovery)
+                console.log("passwordRecovery", passwordRecovery)
             } catch (error) {
                 alert(error)
             }
-
         }
     }, [])
 

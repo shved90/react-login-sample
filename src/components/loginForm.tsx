@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { Lang } from '../utils/languagePicker'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
 import { ConfirmationStates } from './confirmation'
+import { FetchData, ApplyData } from '../utils/mockApi'
+
 interface LoginFormProps {
     inputStyles: string
 }
@@ -12,33 +14,19 @@ const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
     const [loginData, setLoginData] = useState({})
     const state = useLoginJourneyContext()
 
-    const mockRequest = (formData: FormData) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(formData)
-            }, 2000)
-        })
-    }
+    const applyLogin = (fetchedData: FormData) => {
+        ApplyData(fetchedData, state)
 
-    async function fetchLogin(formData: FormData) {
-        try {
-            state.setJourney("loading")
-            let result = await mockRequest(formData) as FormData
-            const loginData: { [key: string]: FormDataEntryValue } = {}
-            for (let [key, value] of result.entries()) {
-                loginData[key] = value
-            }
+        setTimeout(() => {
             localStorage.setItem("loginData", JSON.stringify(loginData))
             state.setJourney(ConfirmationStates.confirmLogin)
-        } catch (error) {
-            state.setJourney(ConfirmationStates.failedLogin)
-        }
+        }, 500)
     }
 
     const submitLogin: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
-        fetchLogin(formData)
+        FetchData(formData, ConfirmationStates.failedLogin, state).then(fetchedData => applyLogin(fetchedData)).catch(error => alert(error))
     }
 
     const existingLogin = JSON.parse(localStorage.getItem('loginData') || "{}")

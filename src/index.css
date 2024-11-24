@@ -25,3 +25,30 @@ code {
   transform: translate(0) scale(1);
   visibility: visible;
 }
+
+.loader-overlay {
+  position: relative;
+
+
+  form {
+    position: relative;
+    > * {
+      opacity: .5;
+    }
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 25px);
+      left: calc(50% - 25px);
+      width: 50px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 8px solid;
+      border-color: #2563eb #313944;
+      animation: l1 1s infinite;
+      z-index: 1;
+    }
+  }
+}
+@keyframes l1 {to{transform: rotate(.5turn)}}

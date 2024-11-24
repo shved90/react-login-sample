@@ -1,15 +1,19 @@
 import { RegisterForm } from '../components/registerForm'
 import { Lang } from '../utils/languagePicker'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
+import { Confirmation, ConfirmationStates } from "../components/confirmation"
 
 const RegistrationPage = () => {
 
     const inputStyles = 'appearance-none rounded-12px block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-navyBlue focus:border-navyBlue focus:z-10 sm:text-sm'
 
-    useLoginJourneyContext().setTitle(Lang().signup)
+    const state = useLoginJourneyContext()
+    state.setTitle(Lang().createacc)
 
     return (
-        <RegisterForm inputStyles={inputStyles} />
+        state.journey !== ConfirmationStates.confirmRegistration ? 
+            <RegisterForm inputStyles={inputStyles} />
+            : <Confirmation title={Lang().confirmcreteacc} message={`Registration successful`}/>
     )
 }
 

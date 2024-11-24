@@ -1,5 +1,8 @@
 import { ReactElement, useState, useEffect } from 'react'
 import { Lang } from '../utils/languagePicker'
+import { useLoginJourneyContext } from '../utils/loginJourneyContext'
+import { ConfirmationStates } from './confirmation'
+import { FetchData, ApplyData } from '../utils/mockApi'
 
 interface RegisterFormProps {
     inputStyles: string;
@@ -8,15 +11,21 @@ interface RegisterFormProps {
 const RegisterForm = ({ inputStyles }: RegisterFormProps): ReactElement => {
 
     const [registrationData, setRegistrationData] = useState({})
+    const state = useLoginJourneyContext()
+
+    const applyRegistration = (fetchedData: FormData) => {
+        ApplyData(fetchedData, state)
+
+        setTimeout(() => {
+            localStorage.setItem("registrationData", JSON.stringify(registrationData))
+            state.setJourney(ConfirmationStates.confirmRegistration)
+        }, 500)
+    }
 
     const submitRegistration: React.FormEventHandler<HTMLFormElement> = (event) => {
-        // event.preventDefault()
-        const formData = new FormData(event.currentTarget);
-        const registrationData: { [key: string]: FormDataEntryValue } = {}
-        for (let [key, value] of formData.entries()) {
-            registrationData[key] = value
-        }
-        localStorage.setItem("registrationData", JSON.stringify(registrationData));
+        event.preventDefault()
+        const formData = new FormData(event.currentTarget)
+        FetchData(formData, ConfirmationStates.failedRegistration, state).then(fetchedData => applyRegistration(fetchedData)).catch(error => alert(error))
     }
 
     const existingRegistration = JSON.parse(localStorage.getItem('registrationData') || "{}")
@@ -29,7 +38,6 @@ const RegisterForm = ({ inputStyles }: RegisterFormProps): ReactElement => {
             } catch (error) {
                 alert(error)
             }
-
         }
     }, [])
 
@@ -98,7 +106,6 @@ const RegisterForm = ({ inputStyles }: RegisterFormProps): ReactElement => {
             <div className='mt-6 flex items-center justify-between'>
                 <button
                     type='submit'
-                    onClick={event => event.preventDefault()}
                     className='group w-full flex justify-center py-2 px-4 text-sm font-medium rounded-12px text-white bg-blue hover:bg-blue-light focus:outline-none focus:bg-blue-dark focus:ring-blue-light'
                 >
                     {Lang().signup}

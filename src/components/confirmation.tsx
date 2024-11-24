@@ -2,8 +2,6 @@ import { ReactElement } from 'react'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
 import { Lang } from '../utils/languagePicker'
 
-const loginData = JSON.parse(localStorage.getItem('loginData') || "{}")
-
 const ConfirmationStates = {
     confirmLogin: 'confirmLogin',
     confirmPasswordRecovery: 'confirmPasswordRecovery',
@@ -13,18 +11,19 @@ const ConfirmationStates = {
     failedRegistration: 'failedRegistration'
 }
 
-const ConfirmationMessages = {
-    confirmLogin: 'You have successfully loggen in',
-    confirmPasswordRecovery: `Your password recovery request has been processed, check your email at ${loginData.email}`,
-    confirmRegistration: 'confirmRegistration'
+type confirmationValues = {
+    message: string
+    title: string
 }
 
-const Confirmation = ({ }): ReactElement => {
+const Confirmation = ({title, message}: confirmationValues): ReactElement => {
 
-    useLoginJourneyContext().setTitle(Lang().confirmsignin)
+    useLoginJourneyContext().setTitle(title)
 
     return (
-        <p className='border-solid rounded-md border-white border-2 text-white mt-4 p-2'>{ConfirmationMessages.confirmPasswordRecovery}</p>
+        <p className='border-solid rounded-md border-white border-2 text-white mt-4 p-2'>
+            {message}
+        </p>
     )
 }
 
