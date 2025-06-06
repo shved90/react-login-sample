@@ -1,8 +1,8 @@
-import { PasswordRecoveryForm } from "../components/passwordRecoveryForm"
+import { PasswordRecoveryForm } from "../components/PasswordRecoveryForm"
 import { Link } from 'react-router-dom'
 import { Lang } from '../utils/languagePicker'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
-import { Confirmation, ConfirmationStates } from "../components/confirmation"
+import { Confirmation, ConfirmationStates } from "../components/Confirmation"
 
 const PasswordRecoverPage = () => {
 

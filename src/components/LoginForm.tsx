@@ -2,9 +2,9 @@ import { ReactElement, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Lang } from '../utils/languagePicker'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
-import { ConfirmationStates } from './confirmation'
+import { ConfirmationStates } from './Confirmation'
 import { FetchData, ApplyData } from '../utils/mockApi'
-
+import { storeData, getData } from '../utils/storageManager'
 interface LoginFormProps {
     inputStyles: string
 }
@@ -16,9 +16,11 @@ const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
 
     const applyLogin = (fetchedData: FormData) => {
         ApplyData(fetchedData, state)
+        setLoginData(fetchedData)
+        console.log(fetchedData)
 
         setTimeout(() => {
-            localStorage.setItem("loginData", JSON.stringify(loginData))
+            storeData("loginData", fetchedData)
             state.setJourney(ConfirmationStates.confirmLogin)
         }, 500)
     }
@@ -29,13 +31,17 @@ const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
         FetchData(formData, ConfirmationStates.failedLogin, state).then(fetchedData => applyLogin(fetchedData)).catch(error => alert(error))
     }
 
-    const existingLogin = JSON.parse(localStorage.getItem('loginData') || "{}")
+    const existingLogin: string = JSON.parse(localStorage.getItem('loginData') || "{}")
 
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
+            const existingData = new FormData()
+            existingData.append("email", Object.entries(existingLogin)[0][1])
+            existingData.append("password", Object.entries(existingLogin)[1][1])
             try {
                 setLoginData(existingLogin)
-                console.log("loginData", loginData)
+                applyLogin(existingData)
+                // submitLogin(existingLogin)
             } catch (error) {
                 alert(error)
             }
@@ -94,3 +100,5 @@ const LoginForm = ({ inputStyles }: LoginFormProps): ReactElement => {
 }
 
 export { LoginForm, LoginFormProps }
+
+// https://rafaelcamargo.com/blog/validating-react-forms-easily-without-third-party-libraries/

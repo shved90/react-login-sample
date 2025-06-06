@@ -1,8 +1,8 @@
 import { ReactElement, useState, useMemo } from 'react'
-import { Header } from './header'
-import { LoginFooter } from './loginFooter'
+import { Header } from './Header'
+import { LoginFooter } from './LoginFooter'
 import { LoginJourneyDefaults } from '../utils/loginJourneyContext'
-import { ConfirmationStates } from './confirmation'
+import { ConfirmationStates } from './Confirmation'
 
 interface MainWrapperProps {
     children: React.ReactNode

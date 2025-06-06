@@ -1,7 +1,7 @@
-import { RegisterForm } from '../components/registerForm'
+import { RegisterForm } from '../components/RegisterForm'
 import { Lang } from '../utils/languagePicker'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
-import { Confirmation, ConfirmationStates } from "../components/confirmation"
+import { Confirmation, ConfirmationStates } from "../components/Confirmation"
 
 const RegistrationPage = () => {
 

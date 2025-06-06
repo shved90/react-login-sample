@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { MainWrapper } from './components/wrapper'
+import { MainWrapper } from './components/MainWrapper'
 import { ThemeProvider } from './utils/themeProvider'
 import { LangProvider } from './utils/langProvider'
 import { BrowserRouter } from "react-router-dom";

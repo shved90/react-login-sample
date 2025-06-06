@@ -1,7 +1,7 @@
 import { ReactElement, useState, useEffect } from 'react'
 import { Lang } from '../utils/languagePicker'
 import { FetchData, ApplyData } from '../utils/mockApi'
-import { ConfirmationStates } from './confirmation'
+import { ConfirmationStates } from './Confirmation'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
 
 interface PasswordRecoveryFormProps {

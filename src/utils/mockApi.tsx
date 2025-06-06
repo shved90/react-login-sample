@@ -1,6 +1,4 @@
-
 import { LoginJourneyContextTypes } from '../utils/loginJourneyContext'
-
 
 const mockRequest = (formData: FormData) => {
     return new Promise((resolve) => {

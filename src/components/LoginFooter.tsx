@@ -2,7 +2,7 @@ import { ReactElement, useEffect } from 'react'
 import { ReactComponent as Sun } from '../assets/sun.svg'
 import { ReactComponent as Moon } from '../assets/moon.svg'
 import { useTheme } from '../utils/themeProvider'
-import { Dropdown } from './dropdown'
+import { Dropdown } from './Dropdown'
 import { Lang } from '../utils/languagePicker'
 
 const LoginFooter = ({ }): ReactElement => {

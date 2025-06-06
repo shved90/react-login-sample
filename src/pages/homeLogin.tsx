@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Lang } from '../utils/languagePicker'
-import { LoginForm } from '../components/loginForm'
+import { LoginForm } from '../components/LoginForm'
 import { useLoginJourneyContext } from '../utils/loginJourneyContext'
-import { Confirmation, ConfirmationStates } from '../components/confirmation'
+import { Confirmation, ConfirmationStates } from '../components/Confirmation'
 
 const LoginPage = () => {
 

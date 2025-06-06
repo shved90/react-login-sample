@@ -11,17 +11,17 @@ const ConfirmationStates = {
     failedRegistration: 'failedRegistration'
 }
 
-type confirmationValues = {
+type ConfirmationProps = {
     message: string
     title: string
 }
 
-const Confirmation = ({title, message}: confirmationValues): ReactElement => {
+const Confirmation = ({title, message}: ConfirmationProps): ReactElement => {
 
     useLoginJourneyContext().setTitle(title)
 
     return (
-        <p className='border-solid rounded-md border-white border-2 text-white mt-4 p-2'>
+        <p className='border-solid rounded-md border-black-500 border-2 text-black-500 dark:border-white dark:text-white mt-4 p-2'>
             {message}
         </p>
     )
