@@ -1,27 +1,44 @@
-import type { ReactNode, Dispatch } from 'react'
-import { useContext, createContext, useReducer, useMemo } from "react"
+import { createContext, useContext, useReducer, useMemo, useEffect, Dispatch, ReactNode } from 'react'
 
-const defaultTheme = { theme: 'light' }
-
-export type State = typeof defaultTheme
+type Theme = 'light' | 'dark'
+type State = { theme: Theme }
+type Action = { type: 'TOGGLE_THEME' } | { type: 'SET_THEME'; payload: Theme }
 
 const ThemeContext = createContext<
-    { state: State, dispatchTheme: Dispatch<State> } | undefined
+    { state: State; dispatch: Dispatch<Action> } | undefined
 >(undefined)
 
-const themeReducer = (state: State) => {
-    return { theme: state.theme }
+const reducer = (state: State, action: Action): State => {
+    switch (action.type) {
+        case 'TOGGLE_THEME':
+            return { theme: state.theme === 'light' ? 'dark' : 'light' }
+        case 'SET_THEME':
+            return { theme: action.payload }
+        default:
+            return state
+    }
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [state, dispatchTheme] = useReducer(themeReducer, defaultTheme)
+    const getInitialTheme = (): Theme =>
+        localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
 
-    const themeValue = useMemo(() => ({
-        state, dispatchTheme
-    }), [state]);
+    const [state, dispatch] = useReducer(reducer, { theme: getInitialTheme() })
+
+    useEffect(() => {
+        const isDark = state.theme === 'dark'
+        document.body.classList.toggle('dark', isDark)
+        if (isDark) {
+            localStorage.setItem('theme', 'dark')
+        } else {
+            localStorage.removeItem('theme')
+        }
+    }, [state.theme])
+
+    const value = useMemo(() => ({ state, dispatch }), [state])
 
     return (
-        <ThemeContext.Provider value={themeValue}>
+        <ThemeContext.Provider value={value}>
             {children}
         </ThemeContext.Provider>
     )

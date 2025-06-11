@@ -7,33 +7,18 @@ import { Lang } from '../utils/languagePicker'
 
 const LoginFooter = ({ }): ReactElement => {
 
-    const { dispatchTheme } = useTheme()
-    let bodyClasses = document.body.classList
-
-    useEffect(() => {
-        if (localStorage.getItem('theme') === 'dark') {
-            bodyClasses.add('dark')
-            dispatchTheme({theme: 'dark'})
-        }
-    }, [])
+    const { state, dispatch } = useTheme()
+    const isDark = state.theme === 'dark'
 
     const themeToggle = () => {
-        if (localStorage.getItem('theme') === 'dark') {
-            bodyClasses.remove('dark')
-            localStorage.removeItem('theme')
-            dispatchTheme({theme: 'light'})
-        } else {
-            bodyClasses.add('dark')
-            localStorage.setItem('theme', 'dark')
-            dispatchTheme({theme: 'dark'})
-        }
+        dispatch({ type: 'TOGGLE_THEME' })
     }
 
     return (
         <div className='mt-2 flex items-center justify-between'>
             <div className='flex items-center justify-between pl-4'>
                 <div className='relative h-8 w-8 p-1.5'>
-                    {localStorage.theme === 'dark'
+                    {isDark
                         ? <Moon className='absolute' onClick={themeToggle} fill='white' width='20px' height='20px' />
                         : <Sun className='absolute' onClick={themeToggle} fill='black' width='20px' height='20px' />
                     }
@@ -46,7 +31,6 @@ const LoginFooter = ({ }): ReactElement => {
                 <p className='text-black text-xs dark:text-white'>{Lang().terms}</p>
             </div>
         </div>
-
     )
 }
 
